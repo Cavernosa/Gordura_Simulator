@@ -7,5 +7,6 @@ Um jogo simples feito no python, em que seu objetivo é ficar no peso normal e s
 3. Siga as instruções do instalador
 4. Abra o atalho criado na sua área de trabalho e jogue
 
-#### Como posso ajudar no desenvolvimento do jogo
-Aponte bugs, dê ideias etc.
+### Como posso ajudar no desenvolvimento do jogo
+Aponte bugs e ideias em **Issues**  
+Contribuições no código em **Pull Requests**
