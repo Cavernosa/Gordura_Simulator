@@ -10,3 +10,4 @@ Um jogo simples feito no python, em que seu objetivo é ficar no peso normal e s
 ### Como posso ajudar no desenvolvimento do jogo
 Aponte bugs e ideias em **Issues**  
 Contribuições no código em **Pull Requests**
+Compartilhe com outras pessoas
