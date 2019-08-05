@@ -1,9 +1,9 @@
 Você pode contribuir aforquilhando o projeto ou apontando erros e ideias.
 
 # Aforquilhando
-1. Aforquilhe o projeto no botão "**Fork**"
-2. No projeto aforquilhado, faça mudanças no código.
-3. Faça uma pull request no projeto comparando sua aforquilhação com o projeto
+1. Aforquilhe o repositório no botão "**Fork**", será criado uma cópia no seu perfil que você pode editar o que quiser!
+2. No repositório aforquilhado, faça mudanças no código.
+3. Faça uma pull request no repositório comparando sua aforquilhação com o meu repositório
 
 # Erros e ideias
 Qualquer ideia que esteja ligada com o tema do jogo e qualquer erro que achar você criará um post em **Issues**.
