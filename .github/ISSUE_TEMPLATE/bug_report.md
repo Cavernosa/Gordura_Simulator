@@ -3,7 +3,7 @@ name: Relatório de bug/problema
 about: Faça um relatório de bug para que melhoremos o jogo!
 title: Um bug misterioso...ooohh...
 labels: ''
-assignees: ''
+assignees: Liebelts
 
 ---
 
