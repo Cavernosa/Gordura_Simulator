@@ -1,4 +1,4 @@
-# Gordura Simulator [![Versão](https://img.shields.io/github/release/Liebelts/Gordura_Simulator?color=green&label=Vers%C3%A3o)](https://github.com/Liebelts/Gordura_Simulator/releases/latest/GorduraSimulatorInstall.exe)
+# Gordura Simulator [![Versão](https://img.shields.io/github/release/Liebelts/Gordura_Simulator?color=green&label=Vers%C3%A3o)](https://github.com/Liebelts/Gordura_Simulator/releases/latest/download/GorduraSimulatorInstall.exe)
 *Gordura Simulator* é um jogo simples feito no python, em que seu objetivo é ficar no peso normal e saudável.
 
 ## Como jogar o Gordura Simulator
