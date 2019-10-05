@@ -13,24 +13,6 @@ while True:
     except ValueError:
         print(erroValor)
 altura_dec = altura / 100
-# soma dos valores inteiros
-
-"""soma_imc = pso / altura_dec ** 2
-print('Seu IMC:', soma_imc)
-if soma_imc < 17:
-    print('Você está muito abaixo do peso, engorde!')
-elif soma_imc < 1849 / 100:
-    print('Você está abaixo do peso, coma mais.')
-elif soma_imc < 2499 / 100:
-    print('Peso normal, muito bem, continue assim!')
-elif soma_imc < 2999 / 100:
-    print('Acima do Peso, eu estou vendo esse bolo de banana que você está fazendo.')
-elif soma_imc < 3499 / 100:
-    print('Obesidade, vá praticar alguns exercícios!')
-elif soma_imc < 3999 / 100:
-    print('Obesidade severa, muito gordo, pare de comer bolo de banana e vá praticar exercício.')
-else:
-    print('Obesidade mórbida, procure ajuda!!!')"""
 import time
 
 def personal():
