@@ -1,6 +1,7 @@
-# coding=utf-8
+# coding: utf8
+
 erroValor = 'Entrada inválida! Coloque apenas números.'
-nome = input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n')
+nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'))
 
 print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
@@ -73,6 +74,7 @@ oleo = 0
 sal = 0
 bolo = 0
 pao = 0
+ovo_frito = 0 # unidade
 
 # MERCADO
 def mercado():
@@ -215,7 +217,7 @@ def cozinha():
 
 def cozinha_comer():
     while True:
-        global peso, leite, banana, bolo, pao
+        global peso, leite, banana, bolo, pao, ovo_frito
         try:
             acao_cozinha = int(input('\nVocê foi comer algo'
                                      '\nComer/beber oque?'
@@ -227,7 +229,8 @@ def cozinha_comer():
                                      '\n6: Açúcar (Tem {5})'
                                      '\n7: Comer uma fatia de bolo (Tem {6})'
                                      '\n8: Comer uma fatia de pão (Tem {7})'
-                                     '\n9: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao)))
+                                     '\n9: Comer um ovo frito (Tem {8})'
+                                     '\n10: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao, ovo_frito)))
 
             if acao_cozinha == 2 and leite >= 0.25:
                 print('Você bebeu um pouco de leite e engordou 0.10kg')
@@ -248,7 +251,11 @@ def cozinha_comer():
                 print ('Você comeu uma fatia de pão')
                 pao = round(pao - 0.05, 2)
                 peso = round(peso + 0.10, 2)
-            elif acao_cozinha == 9:
+            elif acao_cozinha == 9 and ovo_frito >= 1:
+                print ('Você comeu um ovo frito')
+                ovo_frito = ovo_frito - 1
+                peso = round(peso + 0.10, 2)
+            elif acao_cozinha == 10:
                 return
             else:
                 print('Você não pode comer isso ou você não tem ele ou o comando é desconhecido')
@@ -258,13 +265,14 @@ def cozinha_comer():
 
 def cozinha_receita():
     while True:
-        global banana, ovo, trigo, leite, margarina, acucar, fermento, oleo, sal, bolo, pao
+        global banana, ovo, trigo, leite, margarina, acucar, fermento, oleo, sal, bolo, pao, ovo_frito
         try:
             cozinha_receita = int(input('\nVocê pensou em fazer uma receita...'
                                         '\nFazer o quê?'
                                         '\n1: Bolo de banana (3 bananas, 3 ovos, 2 xícaras de trigo 200gr, 1 copo de leite 200ml, 3 colheres de margarina, 1.5 xícara de açúcar 150gr, 1 colher (chá) de fermento)'
                                         '\n2: Pão (1 kg de trigo, 1/2 xícara de açúcar 50gr, 1/2 xícara de óleo 100ml, 1/2 colher de sopa de sal, 2 copos de água, 15gr de fermento)'
-                                        '\n3: Voltar\n'))
+                                        '\n3: Ovo frito (1 ovo, 1 colher de sopa óleo 15ml,  1/2 colher de sopa de sal)\n'
+                                        '\n4: Voltar\n'))
             if cozinha_receita == 1 and banana >= 3 and ovo >= 3 and trigo >= 0.2 and leite >= 0.2 and margarina >= 0.24 and acucar >= 0.15 and fermento >= 0.10:
                 print('\nVocê começou a preparar seu bolo')
                 banana = banana - 3
@@ -289,7 +297,17 @@ def cozinha_receita():
                 pao = pao + 1
                 print ('Você terminou de fazer o pão')
 
-            elif cozinha_receita == 3:
+
+            elif cozinha_receita == 3 and ovo >= 1 and oleo >= 0.15 and sal >= 0.01:
+                print('\nVocê começou a fritar um ovo')
+                ovo = ovo - 1
+                oleo = oleo - 0.15
+                sal = sal - 0.01
+                time.sleep(1)
+                ovo_frito = ovo_frito + 1
+                print ('Você terminou de fazer fritar o ovo')
+
+            elif cozinha_receita == 4:
                 return
             else:
                 print('Você não tem ingredientes ou o comando é desconhecido')
