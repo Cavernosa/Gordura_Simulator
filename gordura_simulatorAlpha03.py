@@ -32,8 +32,6 @@ else:
     print('Obesidade mórbida, procure ajuda!!!')"""
 import time
 
-time.sleep(2)
-
 def personal():
     soma_imc = round(peso / altura_dec ** 2, 2)
     print('\nSeu IMC:', soma_imc)
@@ -51,12 +49,10 @@ def personal():
         print('Obesidade severa, muito gordo, pare de comer bolo de banana e vá praticar exercicio\n')
     else:
         print('Obesidade mórbida, procure ajuda!!!\n')
-    time.sleep(2)
 
 personal()
 
 # INICIO DO GAME GORDURA SIMULATOR
-time.sleep(2)
 
 # banco de dados
 dinheiro = 5
@@ -336,7 +332,7 @@ def main():
             print('\nEm sua compulsividade por ficar magro, se exercitou tanto que morreu de cansaço!')
             break
         elif peso <= 10:
-            print('\nMorreu com fome. Será que estava fingindo ser uma criança africana?')
+            print('\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na áfrica!')
             break
         time.sleep(1)
     time.sleep(10)
