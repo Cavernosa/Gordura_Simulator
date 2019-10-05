@@ -35,7 +35,7 @@ import time
 time.sleep(2)
 
 def personal():
-    soma_imc = peso / altura_dec ** 2
+    soma_imc = round(peso / altura_dec ** 2, 2)
     print('\nSeu IMC:', soma_imc)
     if soma_imc < 17:
         print('Você está muito abaixo do peso, engorde!\n')
@@ -246,8 +246,8 @@ def cozinha_comer():
 
             elif acao_cozinha == 8 and pao >= 0.05:
                 print ('Você comeu uma fatia de pão')
-                pao = pao - 0.05
-                peso = peso + 0.10
+                pao = round(pao - 0.05, 2)
+                peso = round(peso + 0.10, 2)
             elif acao_cozinha == 9:
                 return
             else:
