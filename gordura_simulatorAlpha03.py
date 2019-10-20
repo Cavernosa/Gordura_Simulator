@@ -54,6 +54,7 @@ sal = 0
 bolo = 0
 pao = 0
 ovo_frito = 0 # unidade
+panqueca = 0 # unidade
 
 # MERCADO
 def mercado():
@@ -78,7 +79,7 @@ def compras():
     while True:
         global dinheiro, leite, ovo, banana, trigo, margarina, acucar, fermento, oleo, sal
         try:
-            acao_compra = int(input('\nVocê foi ver oque tem para comprar'
+            acao_compra = int(input('\nVocê foi ver o que tem para comprar'
                                     '\nVai comprar o quê?'
                                     '\n1: Ovo R$2 (Tem {0})'
                                     '\n2: Leite R$3 (Tem {1})'
@@ -196,10 +197,10 @@ def cozinha():
 
 def cozinha_comer():
     while True:
-        global peso, leite, banana, bolo, pao, ovo_frito
+        global peso, leite, banana, bolo, pao, ovo_frito, panqueca
         try:
             acao_cozinha = int(input('\nVocê foi comer algo'
-                                     '\nComer/beber oque?'
+                                     '\nComer/beber o que?'
                                      '\n1: Ovo (Tem {0})'
                                      '\n2: Leite (Tem {1})'
                                      '\n3: Banana (Tem {2})'
@@ -209,7 +210,8 @@ def cozinha_comer():
                                      '\n7: Comer uma fatia de bolo (Tem {6})'
                                      '\n8: Comer uma fatia de pão (Tem {7})'
                                      '\n9: Comer um ovo frito (Tem {8})'
-                                     '\n10: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao, ovo_frito)))
+                                     '\n10: Comer uma panqueca (Tem {9})'
+                                     '\n11: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao, ovo_frito, panqueca)))
 
             if acao_cozinha == 2 and leite >= 0.25:
                 print('Você bebeu um pouco de leite e engordou 0.10kg')
@@ -234,7 +236,11 @@ def cozinha_comer():
                 print ('Você comeu um ovo frito')
                 ovo_frito = ovo_frito - 1
                 peso = round(peso + 0.10, 2)
-            elif acao_cozinha == 10:
+            elif acao_cozinha == 10 and panqueca >= 1:
+                print ('Você comeu uma panqueca')
+                panqueca = panqueca - 1
+                peso = round(peso + 0.20, 2)
+            elif acao_cozinha == 11:
                 return
             else:
                 print('Você não pode comer isso. Você não tem essa comida ou o comando é desconhecido')
@@ -244,14 +250,15 @@ def cozinha_comer():
 
 def cozinha_receita():
     while True:
-        global banana, ovo, trigo, leite, margarina, acucar, fermento, oleo, sal, bolo, pao, ovo_frito
+        global banana, ovo, trigo, leite, margarina, acucar, fermento, oleo, sal, bolo, pao, ovo_frito, panqueca
         try:
             cozinha_receita = int(input('\nVocê pensou em fazer uma receita...'
                                         '\nFazer o quê?'
                                         '\n1: Bolo de banana (3 bananas, 3 ovos, 2 xícaras de trigo 200g, 1 copo de leite 200ml, 3 colheres de margarina, 1.5 xícara de açúcar 150g, 1 colher (chá) de fermento)'
                                         '\n2: Pão (1 kg de trigo, 1/2 xícara de açúcar 50g, 1/2 xícara de óleo 100ml, 1/2 colher de sopa de sal, 2 copos de água, 15g de fermento)'
-                                        '\n3: Ovo frito (1 ovo, 1 colher de sopa óleo 15ml,  1/2 colher de sopa de sal)\n'
-                                        '\n4: Voltar\n'))
+                                        '\n3: Ovo frito (1 ovo, 1 colher de sopa óleo 15ml,  1/2 colher de sopa de sal)'
+                                        '\n4: Panqueca (2 xícaras de trigo 200g, 2 copos de leite 250ml, 3 ovos)\n'
+                                        '\n5: Voltar\n'))
             if cozinha_receita == 1 and banana >= 3 and ovo >= 3 and trigo >= 0.2 and leite >= 0.2 and margarina >= 0.24 and acucar >= 0.15 and fermento >= 0.10:
                 print('\nVocê começou a preparar seu bolo')
                 banana = banana - 3
@@ -286,7 +293,16 @@ def cozinha_receita():
                 ovo_frito = ovo_frito + 1
                 print ('Você terminou de fritar o ovo')
 
-            elif cozinha_receita == 4:
+            elif cozinha_receita == 4 and ovo >= 3 and leite >= 0.25 and trigo >= 0.2:
+                print('\nVocê começou a fazer uma panqueca')
+                trigo = trigo - 0.2
+                leite = leite - 0.25
+                ovo = ovo - 3
+                time.sleep(3)
+                panqueca = panqueca + 1
+                print('Você terminou de fazer a panqueca')
+
+            elif cozinha_receita == 5:
                 return
             else:
                 print('Você não tem ingredientes ou o comando é desconhecido')
@@ -299,7 +315,7 @@ def cozinha_receita():
 def main():
     while True:
         try:
-            acao = int(input('\nVocê está em casa. Escolha oque fazer:          |ESTATÍSTICAS '
+            acao = int(input('\nVocê está em casa. Escolha o que fazer:          |ESTATÍSTICAS '
                              '\n1: Ir ao mercado                                |PESO:' + str(peso) + 'kg'
                              '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(cansaco) +
                              '\n3: Praticar exercícios                          |DINHEIRO:' + str(dinheiro) +
