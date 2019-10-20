@@ -1,9 +1,11 @@
 # coding: utf8
 
+import time
+
 erroValor = 'Entrada inválida! Coloque apenas números.'
 nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'))
 
-print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
+print('Ok ', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
 while True:
     try:
@@ -13,7 +15,6 @@ while True:
     except ValueError:
         print(erroValor)
 altura_dec = altura / 100
-import time
 
 def personal():
     soma_imc = round(peso / altura_dec ** 2, 2)
@@ -27,9 +28,9 @@ def personal():
     elif soma_imc < 2999 / 100:
         print('Acima do Peso, eu estou vendo esse bolo de banana que você está fazendo\n')
     elif soma_imc < 3499 / 100:
-        print('Obesidade, vá praticar alguns exercicios!\n')
+        print('Obesidade, vá praticar alguns exercícios!\n')
     elif soma_imc < 3999 / 100:
-        print('Obesidade severa, muito gordo, pare de comer bolo de banana e vá praticar exercicio\n')
+        print('Obesidade severa, muito gordo, pare de comer bolo de banana e vá praticar exercício\n')
     else:
         print('Obesidade mórbida, procure ajuda!!!\n')
 
@@ -75,16 +76,16 @@ def mercado():
 
 def compras():
     while True:
-        global dinheiro, leite, ovo, banana, trigo, margarina,acucar, fermento, oleo, sal
+        global dinheiro, leite, ovo, banana, trigo, margarina, acucar, fermento, oleo, sal
         try:
             acao_compra = int(input('\nVocê foi ver oque tem para comprar'
-                                    '\nVai comprar oque?'
+                                    '\nVai comprar o quê?'
                                     '\n1: Ovo R$2 (Tem {0})'
                                     '\n2: Leite R$3 (Tem {1})'
                                     '\n3: Banana R$1 (Tem {2})'
                                     '\n4: Trigo 1kg R$3 (Tem {3})'
                                     '\n5: Margarina R$5 (Tem {4})'
-                                    '\n6: Açucar 1kg R$3 (Tem {5})'
+                                    '\n6: Açúcar 1kg R$3 (Tem {5})'
                                     '\n7: Sal 500g R$2 (Tem {6})'
                                     '\n8: Fermento R$3 (Tem {7})'
                                     '\n9: Óleo R$3 (Tem {8})'
@@ -116,7 +117,7 @@ def compras():
 
             elif acao_compra == 6 and dinheiro >= 3:
                 dinheiro = dinheiro - 3
-                print('Você comprou um pacote de açucar por 3 reais')
+                print('Você comprou um pacote de açúcar por 3 reais')
                 acucar = acucar + 1
 
             elif acao_compra == 7 and dinheiro >= 2:
@@ -150,7 +151,7 @@ def exercicios():
     global peso, cansaco, stress
     print('\nVocê foi praticar exercícios')
     time.sleep(5)
-    print('Você perdeu 0,5 kg mas ficou cansado, descanse um pouco\n')
+    print('Você perdeu 0,5 kg, mas ficou cansado. Descanse um pouco\n')
     peso = peso - 1 / 2
     cansaco = cansaco + 2
     if stress:
@@ -236,7 +237,7 @@ def cozinha_comer():
             elif acao_cozinha == 10:
                 return
             else:
-                print('Você não pode comer isso ou você não tem ele ou o comando é desconhecido')
+                print('Você não pode comer isso. Você não tem essa comida ou o comando é desconhecido')
         except ValueError:
             print(erroValor)
         time.sleep(1)
@@ -247,8 +248,8 @@ def cozinha_receita():
         try:
             cozinha_receita = int(input('\nVocê pensou em fazer uma receita...'
                                         '\nFazer o quê?'
-                                        '\n1: Bolo de banana (3 bananas, 3 ovos, 2 xícaras de trigo 200gr, 1 copo de leite 200ml, 3 colheres de margarina, 1.5 xícara de açúcar 150gr, 1 colher (chá) de fermento)'
-                                        '\n2: Pão (1 kg de trigo, 1/2 xícara de açúcar 50gr, 1/2 xícara de óleo 100ml, 1/2 colher de sopa de sal, 2 copos de água, 15gr de fermento)'
+                                        '\n1: Bolo de banana (3 bananas, 3 ovos, 2 xícaras de trigo 200g, 1 copo de leite 200ml, 3 colheres de margarina, 1.5 xícara de açúcar 150g, 1 colher (chá) de fermento)'
+                                        '\n2: Pão (1 kg de trigo, 1/2 xícara de açúcar 50g, 1/2 xícara de óleo 100ml, 1/2 colher de sopa de sal, 2 copos de água, 15g de fermento)'
                                         '\n3: Ovo frito (1 ovo, 1 colher de sopa óleo 15ml,  1/2 colher de sopa de sal)\n'
                                         '\n4: Voltar\n'))
             if cozinha_receita == 1 and banana >= 3 and ovo >= 3 and trigo >= 0.2 and leite >= 0.2 and margarina >= 0.24 and acucar >= 0.15 and fermento >= 0.10:
@@ -283,7 +284,7 @@ def cozinha_receita():
                 sal = sal - 0.01
                 time.sleep(1)
                 ovo_frito = ovo_frito + 1
-                print ('Você terminou de fazer fritar o ovo')
+                print ('Você terminou de fritar o ovo')
 
             elif cozinha_receita == 4:
                 return
@@ -332,7 +333,7 @@ def main():
             print('\nEm sua compulsividade por ficar magro, se exercitou tanto que morreu de cansaço!')
             break
         elif peso <= 10:
-            print('\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na áfrica!')
+            print('\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na África!')
             break
         time.sleep(1)
     time.sleep(10)
