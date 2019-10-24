@@ -5,7 +5,7 @@ import time
 erroValor = 'Entrada inválida! Coloque apenas números.'
 nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'))
 
-print('Ok ', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
+print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
 while True:
     try:
@@ -298,7 +298,7 @@ def cozinha_receita():
                 trigo = trigo - 0.2
                 leite = leite - 0.25
                 ovo = ovo - 3
-                time.sleep(3)
+                time.sleep(1)
                 panqueca = panqueca + 1
                 print('Você terminou de fazer a panqueca')
 
@@ -315,7 +315,7 @@ def cozinha_receita():
 def main():
     while True:
         try:
-            acao = int(input('\nVocê está em casa. Escolha o que fazer:          |ESTATÍSTICAS '
+            acao = int(input('\nVocê está em casa. Escolha o que fazer:         |ESTATÍSTICAS '
                              '\n1: Ir ao mercado                                |PESO:' + str(peso) + 'kg'
                              '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(cansaco) +
                              '\n3: Praticar exercícios                          |DINHEIRO:' + str(dinheiro) +
