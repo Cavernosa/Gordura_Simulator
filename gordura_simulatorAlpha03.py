@@ -1,9 +1,27 @@
 # coding: utf8
 
 erroValor = 'Entrada inválida! Coloque apenas números.'
+complemento_hora = "24h"
 nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'))
-
-print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
+while True:
+    try:
+        opcao = str(input('Qual formato de hora você prefere, 24h ou 12h?\n'
+                                 '1: 24h\n'
+                                 '2: 12h\n'))
+        if opcao == "1":
+            print('Formato 24h selecionado.')
+            break
+        elif opcao == "2":
+            print('Formato 12h selecionado.')
+            complemento_hora = "12h"
+            break
+        else:
+            print('Comando inválido!')
+    except ValueError:
+        print(erroValor)
+print('\nPerceba que há passagem de tempo para se locomover e certos estabelecimentos só atendem em' +
+      '\ndeterminados horários.')
+print('Ok ', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
 while True:
     try:
@@ -41,6 +59,9 @@ personal()
 dinheiro = 5
 cansaco = 0
 stress = 0
+hora_atual = 8
+minuto_atual = 0
+dia_atual = 1
 ovo = 0
 leite = 0
 banana = 0
@@ -54,6 +75,34 @@ bolo = 0
 pao = 0
 ovo_frito = 0 # unidade
 
+# banco de dados tempo
+TEMPO_VIAGEM_TRABALHO = 30
+TEMPO_VIAGEM_MERCADO = 20
+TEMPO_EXERCICIO = 1
+TEMPO_TRABALHO = 6
+TEMPO_COZINHAR = 20
+TEMPO_COMER = 15
+
+# PASSAGEM DE TEMPO
+def passagem_tempo(horas, minutos):
+    global hora_atual, minuto_atual, dia_atual
+    if not(0 <= horas <= 24):
+        raise ValueError("As horas devem corresponder a um horário válido em um dia.")
+    if not(0 <= minutos <= 59):
+        raise ValueError("Os minutos devem corresponder a um horário válido em um dia.")
+
+    if minuto_atual + minutos >= 60:
+        minuto_atual = (minuto_atual + minutos) % 60
+        hora_atual += 1
+    else:
+        minuto_atual += minutos
+
+    if hora_atual + horas > 24:
+        hora_atual = (hora_atual + horas) % 24
+        dia_atual += 1
+    else:
+        hora_atual += horas 
+        
 # MERCADO
 def mercado():
     while True:
@@ -74,79 +123,84 @@ def mercado():
         time.sleep(1)
 
 def compras():
-    while True:
-        global dinheiro, leite, ovo, banana, trigo, margarina,acucar, fermento, oleo, sal
-        try:
-            acao_compra = int(input('\nVocê foi ver oque tem para comprar'
-                                    '\nVai comprar oque?'
-                                    '\n1: Ovo R$2 (Tem {0})'
-                                    '\n2: Leite R$3 (Tem {1})'
-                                    '\n3: Banana R$1 (Tem {2})'
-                                    '\n4: Trigo 1kg R$3 (Tem {3})'
-                                    '\n5: Margarina R$5 (Tem {4})'
-                                    '\n6: Açucar 1kg R$3 (Tem {5})'
-                                    '\n7: Sal 500g R$2 (Tem {6})'
-                                    '\n8: Fermento R$3 (Tem {7})'
-                                    '\n9: Óleo R$3 (Tem {8})'
-                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal, fermento, oleo)))
-            if acao_compra == 1 and dinheiro >= 2:
-                dinheiro = dinheiro - 2
-                print('Você comprou um ovo por 2 reais')
-                ovo = ovo + 1
+    passagem_tempo(0, TEMPO_VIAGEM_MERCADO)
+    if hora_atual > 18 or hora_atual < 8:
+        print('\nMercado Fechado! Volte entre às 8h e 18h.')
+    else:
+        while True:
+            global dinheiro, leite, ovo, banana, trigo, margarina,acucar, fermento, oleo, sal
+            try:
+                acao_compra = int(input('\nVocê foi ver oque tem para comprar'
+                                        '\nVai comprar oque?'
+                                        '\n1: Ovo R$2 (Tem {0})'
+                                        '\n2: Leite R$3 (Tem {1})'
+                                        '\n3: Banana R$1 (Tem {2})'
+                                        '\n4: Trigo 1kg R$3 (Tem {3})'
+                                        '\n5: Margarina R$5 (Tem {4})'
+                                        '\n6: Açucar 1kg R$3 (Tem {5})'
+                                        '\n7: Sal 500g R$2 (Tem {6})'
+                                        '\n8: Fermento R$3 (Tem {7})'
+                                        '\n9: Óleo R$3 (Tem {8})'
+                                        '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal, fermento, oleo)))
+                if acao_compra == 1 and dinheiro >= 2:
+                    dinheiro = dinheiro - 2
+                    print('Você comprou um ovo por 2 reais')
+                    ovo = ovo + 1
 
-            elif acao_compra == 2 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
-                print('Você comprou um leite por 3 reais')
-                leite = leite + 1
+                elif acao_compra == 2 and dinheiro >= 3:
+                    dinheiro = dinheiro - 3
+                    print('Você comprou um leite por 3 reais')
+                    leite = leite + 1
 
-            elif acao_compra == 3 and dinheiro >= 1:
-                dinheiro = dinheiro - 1
-                print('Você comprou uma banana por 1 real')
-                banana = banana + 1
+                elif acao_compra == 3 and dinheiro >= 1:
+                    dinheiro = dinheiro - 1
+                    print('Você comprou uma banana por 1 real')
+                    banana = banana + 1
 
-            elif acao_compra == 4 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
-                print('Você comprou um pacote de trigo por 3 reais')
-                trigo = trigo + 1
+                elif acao_compra == 4 and dinheiro >= 3:
+                    dinheiro = dinheiro - 3
+                    print('Você comprou um pacote de trigo por 3 reais')
+                    trigo = trigo + 1
 
-            elif acao_compra == 5 and dinheiro >= 5:
-                dinheiro = dinheiro - 5
-                print('Você comprou uma margarina por 5 reais')
-                margarina = margarina + 1
+                elif acao_compra == 5 and dinheiro >= 5:
+                    dinheiro = dinheiro - 5
+                    print('Você comprou uma margarina por 5 reais')
+                    margarina = margarina + 1
 
-            elif acao_compra == 6 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
-                print('Você comprou um pacote de açucar por 3 reais')
-                acucar = acucar + 1
+                elif acao_compra == 6 and dinheiro >= 3:
+                    dinheiro = dinheiro - 3
+                    print('Você comprou um pacote de açucar por 3 reais')
+                    acucar = acucar + 1
 
-            elif acao_compra == 7 and dinheiro >= 2:
-                dinheiro = dinheiro - 2
-                print('Você comprou um sal 500g por 2 reais')
-                sal = sal + 1
+                elif acao_compra == 7 and dinheiro >= 2:
+                    dinheiro = dinheiro - 2
+                    print('Você comprou um sal 500g por 2 reais')
+                    sal = sal + 1
 
-            elif acao_compra == 8 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
-                print ('Você comprou um potinho de fermento por 3 reais')
-                fermento = fermento + 1
+                elif acao_compra == 8 and dinheiro >= 3:
+                    dinheiro = dinheiro - 3
+                    print ('Você comprou um potinho de fermento por 3 reais')
+                    fermento = fermento + 1
 
-            elif acao_compra == 9 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
-                print('Você comprou um óleo por 3 reais')
-                oleo = oleo + 1
+                elif acao_compra == 9 and dinheiro >= 3:
+                    dinheiro = dinheiro - 3
+                    print('Você comprou um óleo por 3 reais')
+                    oleo = oleo + 1
 
-            elif acao_compra == 10:
-                return
-            else:
-                print('Você não tem dinheiro para comprar isso ou o comando é desconhecido!')
+                elif acao_compra == 10:
+                    return
+                else:
+                    print('Você não tem dinheiro para comprar isso ou o comando é desconhecido!')
 
-        except ValueError:
-            print(erroValor)
-        time.sleep(1)
+            except ValueError:
+                print(erroValor)
+            time.sleep(1)
         # FIM DAS COMPRAS NO MERCADO
 
 
 # PRATICAR EXERCICIOS:
 def exercicios():
+    passagem_tempo(TEMPO_EXERCICIO, 0)
     global peso, cansaco, stress
     print('\nVocê foi praticar exercícios')
     time.sleep(5)
@@ -160,17 +214,23 @@ def exercicios():
 
 # TRABALHAR:
 def trabalho():
-    global dinheiro, cansaco, stress
-    print('\nVocê foi trabalhar\n...')
-    time.sleep(3)
-    print('Trabalhando...')
-    time.sleep(3)
-    print('Você terminou seu trabalho e ganhou 10 reais\n')
-    dinheiro = dinheiro + 10
-    if cansaco:
-        cansaco = cansaco - 1
-    stress = stress + 1
-    time.sleep(3)
+    passagem_tempo(0, TEMPO_VIAGEM_TRABALHO)
+    global dinheiro, cansaco, stress, hora_atual, minuto_atual
+    if hora_atual > 12 or hora_atual < 6:
+        print('\nVocê não encontrou nenhum lugar para trabalhar!' +
+              '\nVolte entre às 6h e 12h.')
+    else:
+        passagem_tempo(TEMPO_TRABALHO, 0)
+        print('\nVocê foi trabalhar\n...')
+        time.sleep(3)
+        print('Trabalhando...')
+        time.sleep(3)
+        print('Você terminou seu trabalho e ganhou 10 reais\n')
+        dinheiro = dinheiro + 10
+        if cansaco:
+            cansaco = cansaco - 1
+        stress = stress + 1
+        time.sleep(3)
 
 
 # COZINHA
@@ -214,25 +274,32 @@ def cozinha_comer():
                 print('Você bebeu um pouco de leite e engordou 0.10kg')
                 leite = leite - 0.25
                 peso = peso + 0.10
+                passagem_tempo(0, TEMPO_COZINHAR)
 
             elif acao_cozinha == 3 and banana >= 1:
                 print('Você comeu uma banana e engordou 0.20kg')
                 banana = banana - 1
                 peso = peso + 0.20
+                passagem_tempo(0, TEMPO_COZINHAR)
 
             elif acao_cozinha == 7 and bolo >= 0.1:
                 print('Você comeu uma fatia de bolo')
                 bolo = bolo - 0.1
                 peso = peso + 0.50
+                passagem_tempo(0, TEMPO_COZINHAR)
 
             elif acao_cozinha == 8 and pao >= 0.05:
                 print ('Você comeu uma fatia de pão')
                 pao = round(pao - 0.05, 2)
                 peso = round(peso + 0.10, 2)
+                passagem_tempo(0, TEMPO_COZINHAR)
+
             elif acao_cozinha == 9 and ovo_frito >= 1:
                 print ('Você comeu um ovo frito')
                 ovo_frito = ovo_frito - 1
                 peso = round(peso + 0.10, 2)
+                passagem_tempo(0, TEMPO_COZINHAR)
+                
             elif acao_cozinha == 10:
                 return
             else:
@@ -242,6 +309,7 @@ def cozinha_comer():
         time.sleep(1)
 
 def cozinha_receita():
+    passagem_tempo(0, TEMPO_COMER)
     while True:
         global banana, ovo, trigo, leite, margarina, acucar, fermento, oleo, sal, bolo, pao, ovo_frito
         try:
@@ -297,14 +365,23 @@ def cozinha_receita():
 
 def main():
     while True:
+        if complemento_hora == "24h":
+            hora = str(hora_atual) + "h"
+        else:
+            if hora_atual > 12:
+                hora = str(hora_atual%12) + " PM"
+            else:
+                hora = str(hora_atual) + " AM"
+        hora += str(minuto_atual) + 'm'
         try:
             acao = int(input('\nVocê está em casa. Escolha oque fazer:          |ESTATÍSTICAS '
                              '\n1: Ir ao mercado                                |PESO:' + str(peso) + 'kg'
                              '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(cansaco) +
                              '\n3: Praticar exercícios                          |DINHEIRO:' + str(dinheiro) +
                              '\n4: Ir ao trabalho                               |STRESS:' + str(stress) +
-                             '\n5: Consultar o personal trainer virtual'
-                             '\n6: Ir à cozinha\n'))
+                             '\n5: Consultar o personal trainer virtual         |HORA:' + str(hora) +
+                             '\n6: Ir à cozinha                                 |DIA:' + str(dia_atual) +
+                             '\n'))
             if acao == 1:
                 mercado()
             elif acao == 2:
