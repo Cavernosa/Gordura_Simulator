@@ -12,3 +12,4 @@
 * Aponte bugs e ideias em **Issues**  
 * Contribuições no código em **Pull Requests**  
 * Compartilhe com outras pessoas
+* Há um [roadmap](https://trello.com/b/OTZ4oWuc/gordura-simulator-roadmap) de projetos a serem desenvolvidos
