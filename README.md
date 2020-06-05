@@ -2,7 +2,7 @@
 *Gordura Simulator* é um jogo simples feito no python, em que seu objetivo é ficar no peso normal e saudável.
 
 ## Como jogar o Gordura Simulator
-*PS.: Não há instalação para android no momento, mas é possivel baixar o código-fonte!
+*PS.: Não há instalação para android no momento, mas é possivel baixar o código-fonte!*
 
 ### Windows
 1. Clique no botão verde "Versão" acima, que o redirecionará para a página de download.
