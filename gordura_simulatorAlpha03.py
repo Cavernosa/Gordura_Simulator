@@ -2,8 +2,20 @@
 
 import time
 
+def clear():
+    try:
+        import os
+        lines = os.get_terminal_size().lines
+    except AttributeError:
+        lines = 130
+    print("\n" * lines)
+    
+clear()
+
 erroValor = 'Entrada inválida! Coloque apenas números.'
 nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'))
+
+clear()
 
 print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
@@ -15,6 +27,8 @@ while True:
     except ValueError:
         print(erroValor)
 altura_dec = altura / 100
+
+clear()
 
 def personal():
     soma_imc = round(peso / altura_dec ** 2, 2)
@@ -33,7 +47,9 @@ def personal():
         print('Obesidade severa, muito gordo, pare de comer bolo de banana e vá praticar exercício\n')
     else:
         print('Obesidade mórbida, procure ajuda!!!\n')
-
+    time.sleep(5)
+    clear()
+    
 personal()
 
 # INICIO DO GAME GORDURA SIMULATOR
@@ -66,14 +82,19 @@ def mercado():
                                     '\n'.format(str(dinheiro))))
 
             if acao_mercado == 1:
+                clear()
                 compras()
             elif acao_mercado == 2:
+                clear()
                 return
             else:
                 print('Comando desconhecido!')
         except ValueError:
                 print(erroValor)
         time.sleep(1)
+        clear()
+
+
 
 def compras():
     while True:
@@ -145,6 +166,7 @@ def compras():
             print(erroValor)
         time.sleep(1)
         # FIM DAS COMPRAS NO MERCADO
+        clear()
 
 
 # PRATICAR EXERCICIOS:
@@ -158,6 +180,7 @@ def exercicios():
     if stress:
         stress = stress - 1
     time.sleep(3)
+    clear()
 
 
 # TRABALHAR:
@@ -173,6 +196,7 @@ def trabalho():
         cansaco = cansaco - 1
     stress = stress + 1
     time.sleep(3)
+    clear()
 
 
 # COZINHA
@@ -184,16 +208,20 @@ def cozinha():
                                 '\n2: Fazer alguma receita'
                                 '\n3: Sair da cozinha\n'))
             if cozinha == 1:
+                clear()
                 cozinha_comer()
             elif cozinha == 2:
+                clear()
                 cozinha_receita()
             elif cozinha == 3:
+                clear()
                 return
             else:
                 print('Comando desconhecido, não tem easter egg!!')
         except ValueError:
             print(erroValor)
         time.sleep(1)
+        clear()
 
 def cozinha_comer():
     while True:
@@ -247,6 +275,7 @@ def cozinha_comer():
         except ValueError:
             print(erroValor)
         time.sleep(1)
+        clear()
 
 def cozinha_receita():
     while True:
@@ -309,6 +338,7 @@ def cozinha_receita():
         except ValueError:
             print(erroValor)
         time.sleep(1)
+        clear()
 
 # CASA
 
@@ -323,17 +353,22 @@ def main():
                              '\n5: Consultar o personal trainer virtual'
                              '\n6: Ir à cozinha\n'))
             if acao == 1:
+                clear()
                 mercado()
             elif acao == 2:
                 print('Você dispensou o personal trainer e terminou o jogo')
                 break
             elif acao == 3:
+                clear()
                 exercicios()
             elif acao == 4:
+                clear()
                 trabalho()
             elif acao == 5:
+                clear()
                 personal()
             elif acao == 6:
+                clear()
                 cozinha()
             else:
                 print('')
@@ -353,5 +388,6 @@ def main():
             break
         time.sleep(1)
     time.sleep(10)
+    clear()
 
 main()
