@@ -2,20 +2,20 @@
 
 import time
 
-def clear():
+def limpar():
     try:
         import os
-        lines = os.get_terminal_size().lines
+        linhas = os.get_terminal_size().lines
     except AttributeError:
-        lines = 130
-    print("\n" * lines)
+        linhas = 130
+    print("\n" * linhas)
     
-clear()
+limpar()
 
 erroValor = 'Entrada inválida! Coloque apenas números.'
 nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'))
 
-clear()
+limpar()
 
 print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
@@ -28,7 +28,7 @@ while True:
         print(erroValor)
 altura_dec = altura / 100
 
-clear()
+limpar()
 
 def personal():
     soma_imc = round(peso / altura_dec ** 2, 2)
@@ -48,7 +48,7 @@ def personal():
     else:
         print('Obesidade mórbida, procure ajuda!!!\n')
     time.sleep(5)
-    clear()
+    limpar()
     
 personal()
 
@@ -82,17 +82,17 @@ def mercado():
                                     '\n'.format(str(dinheiro))))
 
             if acao_mercado == 1:
-                clear()
+                limpar()
                 compras()
             elif acao_mercado == 2:
-                clear()
+                limpar()
                 return
             else:
                 print('Comando desconhecido!')
         except ValueError:
                 print(erroValor)
         time.sleep(1)
-        clear()
+        limpar()
 
 
 
@@ -100,7 +100,7 @@ def compras():
     while True:
         global dinheiro, leite, ovo, banana, trigo, margarina, acucar, fermento, oleo, sal
         try:
-            acao_compra = int(input('\nVocê foi ver o que tem para comprar'
+            acao_compra = int(input('\nVocê foi ver o que tem para comprar com {9} reais'
                                     '\nVai comprar o quê?'
                                     '\n1:  Ovo R$2 .........(Tem {0})'
                                     '\n2:  Leite R$3 .......(Tem {1})'
@@ -111,7 +111,7 @@ def compras():
                                     '\n7:  Sal 500g R$2 ....(Tem {6})'
                                     '\n8:  Fermento R$3 ....(Tem {7})'
                                     '\n9:  Óleo R$3 ........(Tem {8})'
-                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal, fermento, oleo)))
+                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal, fermento, oleo, dinheiro)))
             if acao_compra == 1 and dinheiro >= 2:
                 dinheiro = dinheiro - 2
                 print('Você comprou um ovo por 2 reais')
@@ -166,7 +166,7 @@ def compras():
             print(erroValor)
         time.sleep(1)
         # FIM DAS COMPRAS NO MERCADO
-        clear()
+        limpar()
 
 
 # PRATICAR EXERCICIOS:
@@ -180,7 +180,7 @@ def exercicios():
     if stress:
         stress = stress - 1
     time.sleep(3)
-    clear()
+    limpar()
 
 
 # TRABALHAR:
@@ -196,7 +196,7 @@ def trabalho():
         cansaco = cansaco - 1
     stress = stress + 1
     time.sleep(3)
-    clear()
+    limpar()
 
 
 # COZINHA
@@ -208,20 +208,20 @@ def cozinha():
                                 '\n2: Fazer alguma receita'
                                 '\n3: Sair da cozinha\n'))
             if cozinha == 1:
-                clear()
+                limpar()
                 cozinha_comer()
             elif cozinha == 2:
-                clear()
+                limpar()
                 cozinha_receita()
             elif cozinha == 3:
-                clear()
+                limpar()
                 return
             else:
                 print('Comando desconhecido, não tem easter egg!!')
         except ValueError:
             print(erroValor)
         time.sleep(1)
-        clear()
+        limpar()
 
 def cozinha_comer():
     while True:
@@ -275,7 +275,7 @@ def cozinha_comer():
         except ValueError:
             print(erroValor)
         time.sleep(1)
-        clear()
+        limpar()
 
 def cozinha_receita():
     while True:
@@ -338,7 +338,7 @@ def cozinha_receita():
         except ValueError:
             print(erroValor)
         time.sleep(1)
-        clear()
+        limpar()
 
 # CASA
 
@@ -353,22 +353,22 @@ def main():
                              '\n5: Consultar o personal trainer virtual'
                              '\n6: Ir à cozinha\n'))
             if acao == 1:
-                clear()
+                limpar()
                 mercado()
             elif acao == 2:
                 print('Você dispensou o personal trainer e terminou o jogo')
                 break
             elif acao == 3:
-                clear()
+                limpar()
                 exercicios()
             elif acao == 4:
-                clear()
+                limpar()
                 trabalho()
             elif acao == 5:
-                clear()
+                limpar()
                 personal()
             elif acao == 6:
-                clear()
+                limpar()
                 cozinha()
             else:
                 print('')
@@ -388,6 +388,6 @@ def main():
             break
         time.sleep(1)
     time.sleep(10)
-    clear()
+    limpar()
 
 main()
