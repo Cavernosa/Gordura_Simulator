@@ -81,15 +81,15 @@ def compras():
         try:
             acao_compra = int(input('\nVocê foi ver o que tem para comprar'
                                     '\nVai comprar o quê?'
-                                    '\n1: Ovo R$2 (Tem {0})'
-                                    '\n2: Leite R$3 (Tem {1})'
-                                    '\n3: Banana R$1 (Tem {2})'
-                                    '\n4: Trigo 1kg R$3 (Tem {3})'
-                                    '\n5: Margarina R$5 (Tem {4})'
-                                    '\n6: Açúcar 1kg R$3 (Tem {5})'
-                                    '\n7: Sal 500g R$2 (Tem {6})'
-                                    '\n8: Fermento R$3 (Tem {7})'
-                                    '\n9: Óleo R$3 (Tem {8})'
+                                    '\n1:  Ovo R$2 .........(Tem {0})'
+                                    '\n2:  Leite R$3 .......(Tem {1})'
+                                    '\n3:  Banana R$1 ......(Tem {2})'
+                                    '\n4:  Trigo 1kg R$3 ...(Tem {3})'
+                                    '\n5:  Margarina R$5 ...(Tem {4})'
+                                    '\n6:  Açúcar 1kg R$3 ..(Tem {5})'
+                                    '\n7:  Sal 500g R$2 ....(Tem {6})'
+                                    '\n8:  Fermento R$3 ....(Tem {7})'
+                                    '\n9:  Óleo R$3 ........(Tem {8})'
                                     '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal, fermento, oleo)))
             if acao_compra == 1 and dinheiro >= 2:
                 dinheiro = dinheiro - 2
@@ -201,16 +201,16 @@ def cozinha_comer():
         try:
             acao_cozinha = int(input('\nVocê foi comer algo'
                                      '\nComer/beber o que?'
-                                     '\n1: Ovo (Tem {0})'
-                                     '\n2: Leite (Tem {1})'
-                                     '\n3: Banana (Tem {2})'
-                                     '\n4: Trigo 1kg (Tem {3})'
-                                     '\n5: Margarina (Tem {4})'
-                                     '\n6: Açúcar (Tem {5})'
-                                     '\n7: Comer uma fatia de bolo (Tem {6})'
-                                     '\n8: Comer uma fatia de pão (Tem {7})'
-                                     '\n9: Comer um ovo frito (Tem {8})'
-                                     '\n10: Comer uma panqueca (Tem {9})'
+                                     '\n1:  Ovo .....................(Tem {0})'
+                                     '\n2:  Leite ...................(Tem {1})'
+                                     '\n3:  Banana ..................(Tem {2})'
+                                     '\n4:  Trigo 1kg ...............(Tem {3})'
+                                     '\n5:  Margarina ...............(Tem {4})'
+                                     '\n6:  Açúcar ..................(Tem {5})'
+                                     '\n7:  Comer uma fatia de bolo .(Tem {6})'
+                                     '\n8:  Comer uma fatia de pão ..(Tem {7})'
+                                     '\n9:  Comer um ovo frito ......(Tem {8})'
+                                     '\n10: Comer uma panqueca ......(Tem {9})'
                                      '\n11: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao, ovo_frito, panqueca)))
 
             if acao_cozinha == 2 and leite >= 0.25:
