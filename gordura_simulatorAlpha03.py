@@ -2,6 +2,7 @@
 
 import time
 
+
 def limpar():
     try:
         import os
@@ -9,7 +10,8 @@ def limpar():
     except AttributeError:
         linhas = 130
     print("\n" * linhas)
-    
+
+
 limpar()
 
 erroValor = 'Entrada inválida! Coloque apenas números.'
@@ -30,6 +32,7 @@ altura_dec = altura / 100
 
 limpar()
 
+
 def personal():
     soma_imc = round(peso / altura_dec ** 2, 2)
     print('\nSeu IMC:', soma_imc)
@@ -49,7 +52,8 @@ def personal():
         print('Obesidade mórbida, procure ajuda!!!\n')
     time.sleep(5)
     limpar()
-    
+
+
 personal()
 
 # INICIO DO GAME GORDURA SIMULATOR
@@ -62,24 +66,25 @@ ovo = 0
 leite = 0
 banana = 0
 trigo = 0
-margarina = 0 # <- Uma colher = 0.08
+margarina = 0  # <- Uma colher = 0.08
 acucar = 0
 fermento = 0
 oleo = 0
 sal = 0
 bolo = 0
 pao = 0
-ovo_frito = 0 # unidade
-panqueca = 0 # unidade
+ovo_frito = 0  # unidade
+panqueca = 0  # unidade
+
 
 # MERCADO
 def mercado():
     while True:
         try:
             acao_mercado = int(input('\nVocê foi ao mercado com {0} reais no bolso'
-                                    '\n1: Comprar algo'
-                                    '\n2: Voltar pra casa'
-                                    '\n'.format(str(dinheiro))))
+                                     '\n1: Comprar algo'
+                                     '\n2: Voltar pra casa'
+                                     '\n'.format(str(dinheiro))))
 
             if acao_mercado == 1:
                 limpar()
@@ -90,10 +95,9 @@ def mercado():
             else:
                 print('Comando desconhecido!')
         except ValueError:
-                print(erroValor)
+            print(erroValor)
         time.sleep(1)
         limpar()
-
 
 
 def compras():
@@ -111,7 +115,8 @@ def compras():
                                     '\n7:  Sal 500g R$2 ....(Tem {6})'
                                     '\n8:  Fermento R$3 ....(Tem {7})'
                                     '\n9:  Óleo R$3 ........(Tem {8})'
-                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal, fermento, oleo, dinheiro)))
+                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal,
+                                                                     fermento, oleo, dinheiro)))
             if acao_compra == 1 and dinheiro >= 2:
                 dinheiro = dinheiro - 2
                 print('Você comprou um ovo por 2 reais')
@@ -149,7 +154,7 @@ def compras():
 
             elif acao_compra == 8 and dinheiro >= 3:
                 dinheiro = dinheiro - 3
-                print ('Você comprou um potinho de fermento por 3 reais')
+                print('Você comprou um potinho de fermento por 3 reais')
                 fermento = fermento + 1
 
             elif acao_compra == 9 and dinheiro >= 3:
@@ -223,6 +228,7 @@ def cozinha():
         time.sleep(1)
         limpar()
 
+
 def cozinha_comer():
     while True:
         global peso, leite, banana, bolo, pao, ovo_frito, panqueca
@@ -239,7 +245,8 @@ def cozinha_comer():
                                      '\n8:  Comer uma fatia de pão ..(Tem {7})'
                                      '\n9:  Comer um ovo frito ......(Tem {8})'
                                      '\n10: Comer uma panqueca ......(Tem {9})'
-                                     '\n11: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao, ovo_frito, panqueca)))
+                                     '\n11: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao,
+                                                             ovo_frito, panqueca)))
 
             if acao_cozinha == 2 and leite >= 0.25:
                 print('Você bebeu um pouco de leite e engordou 0.10kg')
@@ -257,15 +264,15 @@ def cozinha_comer():
                 peso = peso + 0.50
 
             elif acao_cozinha == 8 and pao >= 0.05:
-                print ('Você comeu uma fatia de pão')
+                print('Você comeu uma fatia de pão')
                 pao = round(pao - 0.05, 2)
                 peso = round(peso + 0.10, 2)
             elif acao_cozinha == 9 and ovo_frito >= 1:
-                print ('Você comeu um ovo frito')
+                print('Você comeu um ovo frito')
                 ovo_frito = ovo_frito - 1
                 peso = round(peso + 0.10, 2)
             elif acao_cozinha == 10 and panqueca >= 1:
-                print ('Você comeu uma panqueca')
+                print('Você comeu uma panqueca')
                 panqueca = panqueca - 1
                 peso = round(peso + 0.20, 2)
             elif acao_cozinha == 11:
@@ -276,6 +283,7 @@ def cozinha_comer():
             print(erroValor)
         time.sleep(1)
         limpar()
+
 
 def cozinha_receita():
     while True:
@@ -299,7 +307,7 @@ def cozinha_receita():
                 fermento = fermento - 0.10
                 time.sleep(6)
                 bolo = bolo + 1
-                print ('Você terminou de fazer o bolo')
+                print('Você terminou de fazer o bolo')
 
             elif cozinha_receita == 2 and trigo >= 1 and acucar >= 0.05 and oleo >= 0.1 and sal >= 0.01 and fermento >= 0.15:
                 print('\nVocê começou a fazer um pão')
@@ -310,7 +318,7 @@ def cozinha_receita():
                 fermento = fermento - 0.15
                 time.sleep(6)
                 pao = pao + 1
-                print ('Você terminou de fazer o pão')
+                print('Você terminou de fazer o pão')
 
 
             elif cozinha_receita == 3 and ovo >= 1 and oleo >= 0.15 and sal >= 0.01:
@@ -320,7 +328,7 @@ def cozinha_receita():
                 sal = sal - 0.01
                 time.sleep(1)
                 ovo_frito = ovo_frito + 1
-                print ('Você terminou de fritar o ovo')
+                print('Você terminou de fritar o ovo')
 
             elif cozinha_receita == 4 and ovo >= 3 and leite >= 0.25 and trigo >= 0.2:
                 print('\nVocê começou a fazer uma panqueca')
@@ -340,6 +348,7 @@ def cozinha_receita():
         time.sleep(1)
         limpar()
 
+
 # CASA
 
 def main():
@@ -347,7 +356,8 @@ def main():
         try:
             acao = int(input('\nVocê está em casa. Escolha o que fazer:         |ESTATÍSTICAS '
                              '\n1: Ir ao mercado                                |PESO:' + str(peso) + 'kg'
-                             '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(cansaco) +
+                                                                                                      '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(
+                cansaco) +
                              '\n3: Praticar exercícios                          |DINHEIRO:' + str(dinheiro) +
                              '\n4: Ir ao trabalho                               |STRESS:' + str(stress) +
                              '\n5: Consultar o personal trainer virtual'
@@ -384,10 +394,12 @@ def main():
             print('\nEm sua compulsividade por ficar magro, se exercitou tanto que morreu de cansaço!')
             break
         elif peso <= 10:
-            print('\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na África!')
+            print(
+                '\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na África!')
             break
         time.sleep(1)
     time.sleep(10)
     limpar()
+
 
 main()
