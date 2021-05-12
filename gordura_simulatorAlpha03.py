@@ -1,23 +1,9 @@
 # coding: utf8
 
-import time
-
-
-def limpar():
-    try:
-        import os
-        linhas = os.get_terminal_size().lines
-    except AttributeError:
-        linhas = 130
-    print("\n" * linhas)
-
-
-limpar()
+from time import sleep
 
 erroValor = 'Entrada inválida! Coloque apenas números.'
 nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'))
-
-limpar()
 
 print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
@@ -30,179 +16,205 @@ while True:
         print(erroValor)
 altura_dec = altura / 100
 
-limpar()
+def loadprint(msg, tempo, vel=0.1):
+    i = 0
+    while i <= tempo:
+        load = ['|', '/', '─','\\']
+        for n in range(4):
+            sleep(vel)
+            print('\r{} [{}]'.format(msg, load[n]), end='', flush=True)
+        i += vel * len(load)
+    print('')
+
+
+def receita(msg, msg2, receita, tempo):
+    for i, ing in enumerate(dt[receita]['ing']):
+        if dt[ing] - dt[receita]['ing'][ing] == True:
+            print(dt) #Testa se tem o suficiente de um item...
+            if i+1 == len(dt[receita]['ing']): # e depois se já é o ultimo item
+                for _ in range(4):
+                    print('\rVocê começou a', msg, end=_*'.', flush=True)
+                    sleep(1)
+                print('')
+                for i in dt[receita]['ing']: #Subtrai os items
+                    dt[i] -= dt[receita]['ing'][i]
+                    sleep(tempo / len(dt[receita]['ing']))
+                    print(i.capitalize()+'...')
+                print('Você', msg2)
+                dt[receita][receita] += 1
+        else:
+            print(f'Você não tem o suficiente de <{ing}>') #...Caso não tenha termina o processo
+            break
 
 
 def personal():
-    soma_imc = round(peso / altura_dec ** 2, 2)
-    print('\nSeu IMC:', soma_imc)
-    if soma_imc < 17:
+    imc = round(peso / altura_dec ** 2, 2)
+    print('\nSeu IMC:', imc)
+    if imc < 17:
         print('Você está muito abaixo do peso, engorde!\n')
-    elif soma_imc < 1849 / 100:
+    elif imc < 1849 / 100:
         print('Você está abaixo do peso, coma mais\n')
-    elif soma_imc < 2499 / 100:
+    elif imc < 2499 / 100:
         print('Peso normal, muito bem, continue assim!\n')
-    elif soma_imc < 2999 / 100:
+    elif imc < 2999 / 100:
         print('Acima do Peso, eu estou vendo esse bolo de banana que você está fazendo\n')
-    elif soma_imc < 3499 / 100:
+    elif imc < 3499 / 100:
         print('Obesidade, vá praticar alguns exercícios!\n')
-    elif soma_imc < 3999 / 100:
+    elif imc < 3999 / 100:
         print('Obesidade severa, muito gordo, pare de comer bolo de banana e vá praticar exercício\n')
     else:
         print('Obesidade mórbida, procure ajuda!!!\n')
-    time.sleep(5)
-    limpar()
-
 
 personal()
 
 # INICIO DO GAME GORDURA SIMULATOR
 
-# banco de dados
-dinheiro = 5
-cansaco = 0
-stress = 0
-ovo = 0
-leite = 0
-banana = 0
-trigo = 0
-margarina = 0  # <- Uma colher = 0.08
-acucar = 0
-fermento = 0
-oleo = 0
-sal = 0
-bolo = 0
-pao = 0
-ovo_frito = 0  # unidade
-panqueca = 0  # unidade
-
+# BANCO DE DADOS
+dt = {
+    'dinheiro': 5,
+    'cansaço': 0,
+    'stress': 0,
+    'ovo': 0,
+    'leite': 500,
+    'banana': 500,
+    'trigo': 500,
+    'margarina': 500, # <- Uma colher = 0.08
+    'açúcar': 500,
+    'fermento': 500,
+    'óleo': 500,
+    'sal': 0,
+    'bolo': {
+        'bolo': 0, #unidades
+        'ing': {'banana': 3, 'ovo': 3, 'trigo': 0.2, 'leite': 0.2, 'margarina': 0.24, 'açúcar': 0.15, 'fermento': 0.10}
+    },   #└> ingredientes
+    'pão': {
+        'pão': 0,
+        'ing': {'trigo': 1, 'açúcar': 0.05, 'óleo': 0.1, 'sal': 0.01, 'fermento': 0.15}
+    },
+    'ovoFrito': {
+        'ovoFrito': 0,
+        'ing': {'ovo': 1, 'óleo': 0.15, 'sal': 0.1}
+    },
+    'panqueca': {
+        'panqueca': 0,
+        'ing': {'ovo': 3, 'leite': 0.25, 'trigo': 0.2}
+    },
+}
 
 # MERCADO
 def mercado():
     while True:
         try:
-            acao_mercado = int(input('\nVocê foi ao mercado com {0} reais no bolso'
-                                     '\n1: Comprar algo'
-                                     '\n2: Voltar pra casa'
-                                     '\n'.format(str(dinheiro))))
+            acao_mercado = int(input('\nVocê foi ao mercado com {dinheiro} reais no bolso'
+                                    '\n1: Comprar algo'
+                                    '\n2: Voltar pra casa'
+                                    '\n'.format_map(dt)))
 
             if acao_mercado == 1:
-                limpar()
                 compras()
             elif acao_mercado == 2:
-                limpar()
                 return
             else:
                 print('Comando desconhecido!')
         except ValueError:
-            print(erroValor)
-        time.sleep(1)
-        limpar()
-
+                print(erroValor)
+        sleep(1)
 
 def compras():
     while True:
-        global dinheiro, leite, ovo, banana, trigo, margarina, acucar, fermento, oleo, sal
         try:
-            acao_compra = int(input('\nVocê foi ver o que tem para comprar com {9} reais'
+            acao_compra = int(input('\nVocê foi ver o que tem para comprar'
                                     '\nVai comprar o quê?'
-                                    '\n1:  Ovo R$2 .........(Tem {0})'
-                                    '\n2:  Leite R$3 .......(Tem {1})'
-                                    '\n3:  Banana R$1 ......(Tem {2})'
-                                    '\n4:  Trigo 1kg R$3 ...(Tem {3})'
-                                    '\n5:  Margarina R$5 ...(Tem {4})'
-                                    '\n6:  Açúcar 1kg R$3 ..(Tem {5})'
-                                    '\n7:  Sal 500g R$2 ....(Tem {6})'
-                                    '\n8:  Fermento R$3 ....(Tem {7})'
-                                    '\n9:  Óleo R$3 ........(Tem {8})'
-                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal,
-                                                                     fermento, oleo, dinheiro)))
-            if acao_compra == 1 and dinheiro >= 2:
-                dinheiro = dinheiro - 2
+                                    '\n1: Ovo R$2 (Tem {ovo})'
+                                    '\n2: Leite R$3 (Tem {leite})'
+                                    '\n3: Banana R$1 (Tem {banana})'
+                                    '\n4: Trigo 1kg R$3 (Tem {trigo})'
+                                    '\n5: Margarina R$5 (Tem {margarina})'
+                                    '\n6: Açúcar 1kg R$3 (Tem {açúcar})'
+                                    '\n7: Sal 500g R$2 (Tem {sal})'
+                                    '\n8: Fermento R$3 (Tem {fermento})'
+                                    '\n9: Óleo R$3 (Tem {óleo})'
+                                    '\n10: Sair do mercado\n'.format_map(dt)))
+            if acao_compra == 1 and dt['dinheiro'] >= 2:
+                dt['dinheiro'] -= 2
                 print('Você comprou um ovo por 2 reais')
-                ovo = ovo + 1
+                dt['ovo'] += 1
 
-            elif acao_compra == 2 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
+            elif acao_compra == 2 and dt['dinheiro'] >= 3:
+                dt['dinheiro'] -= 3
                 print('Você comprou um leite por 3 reais')
-                leite = leite + 1
+                dt['leite'] += 1
 
-            elif acao_compra == 3 and dinheiro >= 1:
-                dinheiro = dinheiro - 1
+            elif acao_compra == 3 and dt['dinheiro'] >= 1:
+                dt['dinheiro'] -= 1
                 print('Você comprou uma banana por 1 real')
-                banana = banana + 1
+                dt['banana'] += 1
 
-            elif acao_compra == 4 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
+            elif acao_compra == 4 and dt['dinheiro'] >= 3:
+                dt['dinheiro'] -= 3
                 print('Você comprou um pacote de trigo por 3 reais')
-                trigo = trigo + 1
+                dt['trigo'] += 1
 
-            elif acao_compra == 5 and dinheiro >= 5:
-                dinheiro = dinheiro - 5
+            elif acao_compra == 5 and dt['dinheiro'] >= 5:
+                dt['dinheiro'] -= 5
                 print('Você comprou uma margarina por 5 reais')
-                margarina = margarina + 1
+                dt['margarina'] += 1
 
-            elif acao_compra == 6 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
+            elif acao_compra == 6 and dt['dinheiro'] >= 3:
+                dt['dinheiro'] -= 3
                 print('Você comprou um pacote de açúcar por 3 reais')
-                acucar = acucar + 1
+                dt['açúcar'] += 1
 
-            elif acao_compra == 7 and dinheiro >= 2:
-                dinheiro = dinheiro - 2
+            elif acao_compra == 7 and dt['dinheiro'] >= 2:
+                dt['dinheiro'] -= 2
                 print('Você comprou um sal 500g por 2 reais')
-                sal = sal + 1
+                dt['sal'] += 1
 
-            elif acao_compra == 8 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
-                print('Você comprou um potinho de fermento por 3 reais')
-                fermento = fermento + 1
+            elif acao_compra == 8 and dt['dinheiro'] >= 3:
+                dt['dinheiro'] -= 3
+                print ('Você comprou um potinho de fermento por 3 reais')
+                dt['fermento'] += 1
 
-            elif acao_compra == 9 and dinheiro >= 3:
-                dinheiro = dinheiro - 3
+            elif acao_compra == 9 and dt['dinheiro'] >= 3:
+                dt['dinheiro'] -= 3
                 print('Você comprou um óleo por 3 reais')
-                oleo = oleo + 1
-
+                dt['óleo'] += 1
+            
             elif acao_compra == 10:
                 return
             else:
                 print('Você não tem dinheiro para comprar isso ou o comando é desconhecido!')
-
         except ValueError:
             print(erroValor)
-        time.sleep(1)
+        sleep(1)
         # FIM DAS COMPRAS NO MERCADO
-        limpar()
 
 
 # PRATICAR EXERCICIOS:
 def exercicios():
-    global peso, cansaco, stress
-    print('\nVocê foi praticar exercícios')
-    time.sleep(5)
+    global peso
+    loadprint('Você foi praticar exercícios', 5)
     print('Você perdeu 0,5 kg, mas ficou cansado. Descanse um pouco\n')
-    peso = peso - 1 / 2
-    cansaco = cansaco + 2
-    if stress:
-        stress = stress - 1
-    time.sleep(3)
-    limpar()
-
+    dt['cansaço'] += 2
+    if dt['stress']:
+        dt['stress'] -= 1
+    peso -= 0.5
+    sleep(3)
 
 # TRABALHAR:
 def trabalho():
-    global dinheiro, cansaco, stress
-    print('\nVocê foi trabalhar\n...')
-    time.sleep(3)
-    print('Trabalhando...')
-    time.sleep(3)
+    for i in range(4):
+        print('\rVocê foi trabalhar', end=i*'.', flush=True)
+        sleep(1)
+    for i in range(4):
+        print('Trabalhando', end=i*'.', flush=True)
+        sleep(1)
     print('Você terminou seu trabalho e ganhou 10 reais\n')
-    dinheiro = dinheiro + 10
-    if cansaco:
-        cansaco = cansaco - 1
-    stress = stress + 1
-    time.sleep(3)
-    limpar()
-
+    dt['dinheiro'] += 10
+    if dt['cansaço']:
+        dt['cansaço'] -= 1
+    dt['stress'] += 1
+    sleep(3)
 
 # COZINHA
 def cozinha():
@@ -213,81 +225,76 @@ def cozinha():
                                 '\n2: Fazer alguma receita'
                                 '\n3: Sair da cozinha\n'))
             if cozinha == 1:
-                limpar()
                 cozinha_comer()
             elif cozinha == 2:
-                limpar()
                 cozinha_receita()
             elif cozinha == 3:
-                limpar()
                 return
             else:
                 print('Comando desconhecido, não tem easter egg!!')
         except ValueError:
             print(erroValor)
-        time.sleep(1)
-        limpar()
-
+        sleep(1)
 
 def cozinha_comer():
+    global peso
     while True:
-        global peso, leite, banana, bolo, pao, ovo_frito, panqueca
         try:
             acao_cozinha = int(input('\nVocê foi comer algo'
                                      '\nComer/beber o que?'
-                                     '\n1:  Ovo .....................(Tem {0})'
-                                     '\n2:  Leite ...................(Tem {1})'
-                                     '\n3:  Banana ..................(Tem {2})'
-                                     '\n4:  Trigo 1kg ...............(Tem {3})'
-                                     '\n5:  Margarina ...............(Tem {4})'
-                                     '\n6:  Açúcar ..................(Tem {5})'
-                                     '\n7:  Comer uma fatia de bolo .(Tem {6})'
-                                     '\n8:  Comer uma fatia de pão ..(Tem {7})'
-                                     '\n9:  Comer um ovo frito ......(Tem {8})'
-                                     '\n10: Comer uma panqueca ......(Tem {9})'
-                                     '\n11: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao,
-                                                             ovo_frito, panqueca)))
+                                     '\n1: Ovo (Tem {ovo})'
+                                     '\n2: Leite (Tem {leite})'
+                                     '\n3: Banana (Tem {banana})'
+                                     '\n4: Trigo 1kg (Tem {trigo})'
+                                     '\n5: Margarina (Tem {margarina})'
+                                     '\n6: Açúcar (Tem {açúcar})'
+                                     '\n7: Comer uma fatia de bolo (Tem {bolo})'
+                                     '\n8: Comer uma fatia de pão (Tem {pão})'
+                                     '\n9: Comer um ovo frito (Tem {ovoFrito})'
+                                     '\n10: Comer uma panqueca (Tem {panqueca})'
+                                     '\n11: Voltar\n'.format_map(dt)))
 
-            if acao_cozinha == 2 and leite >= 0.25:
+            if acao_cozinha == 2 and dt['leite'] >= 0.25:
                 print('Você bebeu um pouco de leite e engordou 0.10kg')
-                leite = leite - 0.25
-                peso = peso + 0.10
+                dt['leite'] -= 0.25
+                peso += 0.10
 
-            elif acao_cozinha == 3 and banana >= 1:
+            elif acao_cozinha == 3 and dt['banana'] >= 1:
                 print('Você comeu uma banana e engordou 0.20kg')
-                banana = banana - 1
-                peso = peso + 0.20
+                dt['banana'] -= 1
+                peso += 0.20
 
-            elif acao_cozinha == 7 and bolo >= 0.1:
+            elif acao_cozinha == 7 and dt['bolo'] >= 0.1:
                 print('Você comeu uma fatia de bolo')
-                bolo = bolo - 0.1
-                peso = peso + 0.50
+                dt['bolo'] -= 0.1
+                peso += 0.50
 
-            elif acao_cozinha == 8 and pao >= 0.05:
-                print('Você comeu uma fatia de pão')
-                pao = round(pao - 0.05, 2)
+            elif acao_cozinha == 8 and dt['pão'] >= 0.05:
+                print ('Você comeu uma fatia de pão')
+                dt['pão'] = round(dt['pão'] - 0.05, 2)
                 peso = round(peso + 0.10, 2)
-            elif acao_cozinha == 9 and ovo_frito >= 1:
-                print('Você comeu um ovo frito')
-                ovo_frito = ovo_frito - 1
+
+            elif acao_cozinha == 9 and dt['ovoFrito'] >= 1:
+                print ('Você comeu um ovo frito')
+                dt['ovoFrito'] -= 1
                 peso = round(peso + 0.10, 2)
-            elif acao_cozinha == 10 and panqueca >= 1:
-                print('Você comeu uma panqueca')
-                panqueca = panqueca - 1
+
+            elif acao_cozinha == 10 and dt['panqueca'] >= 1:
+                print ('Você comeu uma panqueca')
+                dt['panqueca'] -= 1
                 peso = round(peso + 0.20, 2)
+
             elif acao_cozinha == 11:
                 return
             else:
-                print('Você não pode comer isso. Você não tem essa comida ou o comando é desconhecido')
+                print('Você não pode comer isso, você não tem essa comida ou o comando é desconhecido')
         except ValueError:
             print(erroValor)
-        time.sleep(1)
-        limpar()
-
+        sleep(1)
 
 def cozinha_receita():
     while True:
-        global banana, ovo, trigo, leite, margarina, acucar, fermento, oleo, sal, bolo, pao, ovo_frito, panqueca
+        #global banana, ovo, trigo, leite, margarina, açúcar, fermento, óleo, sal, bolo, pão, ovo_frito, panqueca
         try:
             cozinha_receita = int(input('\nVocê pensou em fazer uma receita...'
                                         '\nFazer o quê?'
@@ -296,59 +303,28 @@ def cozinha_receita():
                                         '\n3: Ovo frito (1 ovo, 1 colher de sopa óleo 15ml,  1/2 colher de sopa de sal)'
                                         '\n4: Panqueca (2 xícaras de trigo 200g, 2 copos de leite 250ml, 3 ovos)\n'
                                         '\n5: Voltar\n'))
-            if cozinha_receita == 1 and banana >= 3 and ovo >= 3 and trigo >= 0.2 and leite >= 0.2 and margarina >= 0.24 and acucar >= 0.15 and fermento >= 0.10:
-                print('\nVocê começou a preparar seu bolo')
-                banana = banana - 3
-                ovo = ovo - 3
-                trigo = trigo - 0.2
-                leite = leite - 0.2
-                margarina = margarina - 0.24
-                acucar = acucar - 0.15
-                fermento = fermento - 0.10
-                time.sleep(6)
-                bolo = bolo + 1
-                print('Você terminou de fazer o bolo')
+            
+            if cozinha_receita == 1:
+                receita('fazer um bolo de banana', 'fez um bolo de banana', 'bolo', 6)
 
-            elif cozinha_receita == 2 and trigo >= 1 and acucar >= 0.05 and oleo >= 0.1 and sal >= 0.01 and fermento >= 0.15:
-                print('\nVocê começou a fazer um pão')
-                trigo = trigo - 1
-                acucar = acucar - 0.05
-                oleo = oleo - 0.1
-                sal = sal - 0.01
-                fermento = fermento - 0.15
-                time.sleep(6)
-                pao = pao + 1
-                print('Você terminou de fazer o pão')
+            elif cozinha_receita == 2:
+                receita('fazer um pão', 'fez um pão', 'pão', 6)
 
+            elif cozinha_receita == 3:
+                receita('fritar um ovo', 'fritou um ovo', 'ovoFrito', 2)
 
-            elif cozinha_receita == 3 and ovo >= 1 and oleo >= 0.15 and sal >= 0.01:
-                print('\nVocê começou a fritar um ovo')
-                ovo = ovo - 1
-                oleo = oleo - 0.15
-                sal = sal - 0.01
-                time.sleep(1)
-                ovo_frito = ovo_frito + 1
-                print('Você terminou de fritar o ovo')
-
-            elif cozinha_receita == 4 and ovo >= 3 and leite >= 0.25 and trigo >= 0.2:
-                print('\nVocê começou a fazer uma panqueca')
-                trigo = trigo - 0.2
-                leite = leite - 0.25
-                ovo = ovo - 3
-                time.sleep(1)
-                panqueca = panqueca + 1
-                print('Você terminou de fazer a panqueca')
+            elif cozinha_receita == 4:
+                receita('fazer uma panqueca', 'fez uma panqueca', 'panqueca', 2)
 
             elif cozinha_receita == 5:
                 return
             else:
                 print('Você não tem ingredientes ou o comando é desconhecido')
+            print(dt)
         except ValueError:
             print(erroValor)
-        time.sleep(1)
-        limpar()
-
-
+        sleep(1)
+cozinha_receita()
 # CASA
 
 def main():
@@ -356,29 +332,23 @@ def main():
         try:
             acao = int(input('\nVocê está em casa. Escolha o que fazer:         |ESTATÍSTICAS '
                              '\n1: Ir ao mercado                                |PESO:' + str(peso) + 'kg'
-                                                                                                      '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(
-                cansaco) +
+                             '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(cansaço) +
                              '\n3: Praticar exercícios                          |DINHEIRO:' + str(dinheiro) +
                              '\n4: Ir ao trabalho                               |STRESS:' + str(stress) +
                              '\n5: Consultar o personal trainer virtual'
                              '\n6: Ir à cozinha\n'))
             if acao == 1:
-                limpar()
                 mercado()
             elif acao == 2:
                 print('Você dispensou o personal trainer e terminou o jogo')
                 break
             elif acao == 3:
-                limpar()
                 exercicios()
             elif acao == 4:
-                limpar()
                 trabalho()
             elif acao == 5:
-                limpar()
                 personal()
             elif acao == 6:
-                limpar()
                 cozinha()
             else:
                 print('')
@@ -390,16 +360,13 @@ def main():
         elif peso >= 250:
             print('\nVocê ficou muito gordo e morreu')
             break
-        elif cansaco >= 20:
+        elif cansaço >= 20:
             print('\nEm sua compulsividade por ficar magro, se exercitou tanto que morreu de cansaço!')
             break
         elif peso <= 10:
-            print(
-                '\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na África!')
+            print('\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na África!')
             break
-        time.sleep(1)
-    time.sleep(10)
-    limpar()
-
+        sleep(1)
+    sleep(10)
 
 main()
