@@ -1,7 +1,3 @@
-# Branch: alpha04-1 
-Esta branch é a mais recente da atualização Alpha 0.4. Houve algumas adições e alterações (é possível vê-las comparando com a master).  
-Não chequei a integridade, está apenas por questões históricas. 
-
 # Gordura Simulator [![Versão](https://img.shields.io/github/release/Liebelts/Gordura_Simulator?color=green&label=Vers%C3%A3o)](https://github.com/Liebelts/Gordura_Simulator/releases/latest/download/GSInstall.exe)
 *Gordura Simulator* é um jogo simples feito no python, em que seu objetivo é ficar no peso normal e saudável.
 
