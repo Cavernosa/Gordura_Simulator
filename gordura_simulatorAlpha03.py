@@ -81,10 +81,10 @@ panqueca = 0  # unidade
 def mercado():
     while True:
         try:
-            acao_mercado = int(input('\nVocê foi ao mercado com {0} reais no bolso'
+            acao_mercado = int(input(f'\nVocê foi ao mercado com {dinheiro} reais no bolso'
                                      '\n1: Comprar algo'
                                      '\n2: Voltar pra casa'
-                                     '\n'.format(str(dinheiro))))
+                                     '\n'))
 
             if acao_mercado == 1:
                 limpar()
@@ -104,19 +104,18 @@ def compras():
     while True:
         global dinheiro, leite, ovo, banana, trigo, margarina, acucar, fermento, oleo, sal
         try:
-            acao_compra = int(input('\nVocê foi ver o que tem para comprar com {9} reais'
-                                    '\nVai comprar o quê?'
-                                    '\n1:  Ovo R$2 .........(Tem {0})'
-                                    '\n2:  Leite R$3 .......(Tem {1})'
-                                    '\n3:  Banana R$1 ......(Tem {2})'
-                                    '\n4:  Trigo 1kg R$3 ...(Tem {3})'
-                                    '\n5:  Margarina R$5 ...(Tem {4})'
-                                    '\n6:  Açúcar 1kg R$3 ..(Tem {5})'
-                                    '\n7:  Sal 500g R$2 ....(Tem {6})'
-                                    '\n8:  Fermento R$3 ....(Tem {7})'
-                                    '\n9:  Óleo R$3 ........(Tem {8})'
-                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal,
-                                                                     fermento, oleo, dinheiro)))
+            acao_compra = int(input(f'\nVocê foi ver o que tem para comprar com {dinheiro} reais'
+                                    f'\nVai comprar o quê?'
+                                    f'\n1:  Ovo R$2 .........(Tem {ovo})'
+                                    f'\n2:  Leite R$3 .......(Tem {leite})'
+                                    f'\n3:  Banana R$1 ......(Tem {banana})'
+                                    f'\n4:  Trigo 1kg R$3 ...(Tem {trigo})'
+                                    f'\n5:  Margarina R$5 ...(Tem {margarina})'
+                                    f'\n6:  Açúcar 1kg R$3 ..(Tem {acucar})'
+                                    f'\n7:  Sal 500g R$2 ....(Tem {sal})'
+                                    f'\n8:  Fermento R$3 ....(Tem {fermento})'
+                                    f'\n9:  Óleo R$3 ........(Tem {oleo})'
+                                    f'\n10: Sair do mercado\n'))
             if acao_compra == 1 and dinheiro >= 2:
                 dinheiro = dinheiro - 2
                 print('Você comprou um ovo por 2 reais')
