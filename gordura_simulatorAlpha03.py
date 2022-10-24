@@ -232,7 +232,7 @@ def cozinha_comer():
     while True:
         global peso, leite, banana, bolo, pao, ovo_frito, panqueca
         try:
-            acao_cozinha = int(input(f'\nVocê foi comer algo'
+            acao_cozinha = int(input('\nVocê foi comer algo'
                                      '\nComer/beber o que?'
                                      f'\n1:  Ovo .....................(Tem {ovo})'
                                      f'\n2:  Leite ...................(Tem {leite})'
