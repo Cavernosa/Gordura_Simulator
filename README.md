@@ -15,7 +15,9 @@
 Não há instalação oficial para dispositivos Android, a única forma de executar o Gordura Simulator <s>que não seja compilar um apk</s> é usando algum emulador de terminal, como o Termux, e seguindo as etapas de instalação do Linux, mas eu não recomendo fazer isso se você não sabe o que está fazendo.
 
 
-## Como você pode [ajudar no desenvolvimento](https://github.com/Liebelts/gordura_simulator/blob/master/CONTRIBUTING.md)
+## Contribuindo para o projeto
+Contribuições são muito bem-vindas. Veja como contribuir no nosso [Guia de Contribuição](https://github.com/Liebelts/gordura_simulator/blob/master/CONTRIBUTING.md).
+
 * Aponte bugs e ideias em **Issues**.
 * Contribuições no código em **Pull Requests**, seguindo os padrões do código.
 * Há um [roadmap](https://trello.com/b/OTZ4oWuc/gordura-simulator-roadmap) de projetos a serem desenvolvidos.
