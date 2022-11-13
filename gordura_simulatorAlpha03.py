@@ -19,7 +19,7 @@ nome = str(input('Olá, eu sou seu personal trainer virtual, qual o seu nome?\n'
 
 limpar()
 
-print('Ok', nome + ', agora preciso saber seu peso e altura para saber se você está fora de forma')
+print(f'Ok {nome}, agora preciso saber seu peso e altura para saber se você está fora de forma')
 # valores string:
 while True:
     try:
@@ -81,10 +81,10 @@ panqueca = 0  # unidade
 def mercado():
     while True:
         try:
-            acao_mercado = int(input('\nVocê foi ao mercado com {0} reais no bolso'
+            acao_mercado = int(input(f'\nVocê foi ao mercado com {dinheiro} reais no bolso'
                                      '\n1: Comprar algo'
                                      '\n2: Voltar pra casa'
-                                     '\n'.format(str(dinheiro))))
+                                     '\n'))
 
             if acao_mercado == 1:
                 limpar()
@@ -104,19 +104,18 @@ def compras():
     while True:
         global dinheiro, leite, ovo, banana, trigo, margarina, acucar, fermento, oleo, sal
         try:
-            acao_compra = int(input('\nVocê foi ver o que tem para comprar com {9} reais'
-                                    '\nVai comprar o quê?'
-                                    '\n1:  Ovo R$2 .........(Tem {0})'
-                                    '\n2:  Leite R$3 .......(Tem {1})'
-                                    '\n3:  Banana R$1 ......(Tem {2})'
-                                    '\n4:  Trigo 1kg R$3 ...(Tem {3})'
-                                    '\n5:  Margarina R$5 ...(Tem {4})'
-                                    '\n6:  Açúcar 1kg R$3 ..(Tem {5})'
-                                    '\n7:  Sal 500g R$2 ....(Tem {6})'
-                                    '\n8:  Fermento R$3 ....(Tem {7})'
-                                    '\n9:  Óleo R$3 ........(Tem {8})'
-                                    '\n10: Sair do mercado\n'.format(ovo, leite, banana, trigo, margarina, acucar, sal,
-                                                                     fermento, oleo, dinheiro)))
+            acao_compra = int(input(f'\nVocê foi ver o que tem para comprar com {dinheiro} reais'
+                                    f'\nVai comprar o quê?'
+                                    f'\n1:  Ovo R$2 .........(Tem {ovo})'
+                                    f'\n2:  Leite R$3 .......(Tem {leite})'
+                                    f'\n3:  Banana R$1 ......(Tem {banana})'
+                                    f'\n4:  Trigo 1kg R$3 ...(Tem {trigo})'
+                                    f'\n5:  Margarina R$5 ...(Tem {margarina})'
+                                    f'\n6:  Açúcar 1kg R$3 ..(Tem {acucar})'
+                                    f'\n7:  Sal 500g R$2 ....(Tem {sal})'
+                                    f'\n8:  Fermento R$3 ....(Tem {fermento})'
+                                    f'\n9:  Óleo R$3 ........(Tem {oleo})'
+                                    '\n10: Sair do mercado\n'))
             if acao_compra == 1 and dinheiro >= 2:
                 dinheiro = dinheiro - 2
                 print('Você comprou um ovo por 2 reais')
@@ -235,18 +234,17 @@ def cozinha_comer():
         try:
             acao_cozinha = int(input('\nVocê foi comer algo'
                                      '\nComer/beber o que?'
-                                     '\n1:  Ovo .....................(Tem {0})'
-                                     '\n2:  Leite ...................(Tem {1})'
-                                     '\n3:  Banana ..................(Tem {2})'
-                                     '\n4:  Trigo 1kg ...............(Tem {3})'
-                                     '\n5:  Margarina ...............(Tem {4})'
-                                     '\n6:  Açúcar ..................(Tem {5})'
-                                     '\n7:  Comer uma fatia de bolo .(Tem {6})'
-                                     '\n8:  Comer uma fatia de pão ..(Tem {7})'
-                                     '\n9:  Comer um ovo frito ......(Tem {8})'
-                                     '\n10: Comer uma panqueca ......(Tem {9})'
-                                     '\n11: Voltar\n'.format(ovo, leite, banana, trigo, margarina, acucar, bolo, pao,
-                                                             ovo_frito, panqueca)))
+                                     f'\n1:  Ovo .....................(Tem {ovo})'
+                                     f'\n2:  Leite ...................(Tem {leite})'
+                                     f'\n3:  Banana ..................(Tem {banana})'
+                                     f'\n4:  Trigo 1kg ...............(Tem {trigo})'
+                                     f'\n5:  Margarina ...............(Tem {margarina})'
+                                     f'\n6:  Açúcar ..................(Tem {acucar})'
+                                     f'\n7:  Comer uma fatia de bolo .(Tem {bolo})'
+                                     f'\n8:  Comer uma fatia de pão ..(Tem {pao})'
+                                     f'\n9:  Comer um ovo frito ......(Tem {ovo_frito})'
+                                     f'\n10: Comer uma panqueca ......(Tem {panqueca})'
+                                     '\n11: Voltar\n'))
 
             if acao_cozinha == 2 and leite >= 0.25:
                 print('Você bebeu um pouco de leite e engordou 0.10kg')
@@ -355,11 +353,10 @@ def main():
     while True:
         try:
             acao = int(input('\nVocê está em casa. Escolha o que fazer:         |ESTATÍSTICAS '
-                             '\n1: Ir ao mercado                                |PESO:' + str(peso) + 'kg'
-                                                                                                      '\n2: Dispensar o personal trainer e terminar      |CANSAÇO:' + str(
-                cansaco) +
-                             '\n3: Praticar exercícios                          |DINHEIRO:' + str(dinheiro) +
-                             '\n4: Ir ao trabalho                               |STRESS:' + str(stress) +
+                             f'\n1: Ir ao mercado                                |PESO: {peso} kg'
+                             f'\n2: Dispensar o personal trainer e terminar      |CANSAÇO: {cansaco}'
+                             f'\n3: Praticar exercícios                          |DINHEIRO: {dinheiro}'
+                             f'\n4: Ir ao trabalho                               |STRESS: {stress}'
                              '\n5: Consultar o personal trainer virtual'
                              '\n6: Ir à cozinha\n'))
             if acao == 1:
@@ -394,8 +391,7 @@ def main():
             print('\nEm sua compulsividade por ficar magro, se exercitou tanto que morreu de cansaço!')
             break
         elif peso <= 10:
-            print(
-                '\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na África!')
+            print('\nMorreu com fome. Será que estava fingindo ser uma criança africana? Faça uma doação e contribua com o fim da fome na África!')
             break
         time.sleep(1)
     time.sleep(10)
